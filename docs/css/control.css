@@ -1,0 +1,21 @@
+/* Control: para el pulgar, en un celular. Estilos de la app Eventos DAD (ver cabina.css). */
+.momentos{display:grid;gap:12px}
+.momento{display:flex;align-items:center;gap:14px;width:100%;min-height:72px;padding:12px 16px;text-align:left;font-weight:800;font-size:1.05rem;color:var(--dk);background:var(--card);border:1px solid var(--line);border-left:5px solid var(--mid);border-radius:var(--radio-tarjeta);box-shadow:var(--sombra-tarjeta);transition:.15s}
+.momento:hover:not(:disabled){border-color:var(--mid)}
+.momento .ico-redondo{width:48px;height:48px}
+.momento .ico-redondo .ico{width:1.5em;height:1.5em}
+.momento[aria-pressed="true"]{background:var(--mid);border-color:var(--mid);border-left-color:var(--or);color:#fff}
+.momento[aria-pressed="true"] .ico-redondo{background:rgba(255,255,255,.18);color:#fff}
+.momento:disabled{opacity:.55;cursor:not-allowed}
+
+.panel-pres{margin-top:12px}
+.pagina{margin:0 0 10px!important;font-weight:700;color:var(--dk);text-align:center;font-size:.95rem!important}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn.grande{min-height:72px;font-size:1.1rem}
+
+.aviso-cerrada{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+
+.abajo{display:flex;gap:10px;margin-top:24px}
+.abajo .btn{flex:1;min-height:44px;padding:0 10px}
+.abajo .ico{width:1.2em;height:1.2em}
+.btn[aria-pressed="true"]{background:var(--mid);border-color:var(--mid);color:#fff}

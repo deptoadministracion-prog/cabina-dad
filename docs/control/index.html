@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control · Cabina DAD (maqueta)</title>
+<link rel="stylesheet" href="../css/cabina.css">
+<link rel="stylesheet" href="../css/control.css">
+</head>
+<body class="control">
+<div class="topbar"></div>
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <img class="logo-dad" src="../img/logo-dad-anillo.png" alt="DAD · CUCEA" width="160" height="160">
+      <div>
+        <p class="eyebrow">Maqueta · contenido ficticio</p>
+        <h1>Presentación de libro <span>(ejemplo)</span></h1>
+      </div>
+    </div>
+    <div class="pills">
+      <span class="pill" id="estado" role="status"><span class="punto"></span><span id="estadoTxt">Buscando la cabina…</span></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h2 class="sec">Momentos</h2>
+  <section class="momentos" id="momentos" aria-label="Momentos del evento"></section>
+
+  <!-- Solo aparece cuando el momento activo es Presentación -->
+  <section class="card mid panel-pres" id="panelPres" hidden aria-label="Páginas de la presentación">
+    <p class="pagina">Página <b id="pagActual">1</b> de <b id="pagTotal"></b></p>
+    <div class="par">
+      <button type="button" class="btn grande" id="ant"></button>
+      <button type="button" class="btn grande pr" id="sig"></button>
+    </div>
+  </section>
+
+  <!-- Solo aparece cuando la cabina está cerrada (simulación) -->
+  <section class="card aviso-cerrada" id="avisoCerrada" hidden>
+    <p><b>Cabina cerrada (simulación).</b> No se borró nada real.</p>
+    <button type="button" class="btn or" id="abrir">Abrir cabina de ejemplo</button>
+  </section>
+
+  <section class="abajo">
+    <button type="button" class="btn" id="negro"></button>
+    <button type="button" class="btn" id="cerrar"></button>
+  </section>
+</main>
+
+<script src="../js/comun.js"></script>
+<script src="../js/control.js"></script>
+</body>
+</html>

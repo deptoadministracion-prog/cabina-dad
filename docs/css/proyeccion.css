@@ -1,0 +1,51 @@
+/* Proyección: fondo y cristal de la portada de la app (ver cabina.css), pensada para leerse en un auditorio.
+   Todo se mide en "em" del escenario, que se adapta a la pantalla: a 1920×1080, 1em ≈ 29,7 px.
+   Reglas para leer desde lejos:
+   - Ningún texto baja de 1,25em (≈ 37 px a 1080p, 1/29 del alto de la pantalla).
+   - Todo el texto es blanco puro: sobre el extremo claro del degradado (#2e6db4) es el único que pasa con holgura (5,3:1).
+   - El naranja no se usa para texto: solo para líneas y relleno de botones. */
+body.proyeccion{height:100vh;overflow:hidden;background:var(--dk-oscuro)}
+.escenario{position:fixed;inset:0;font-size:min(1.55vw,2.75vh);color:#fff;background:var(--degradado-portada)}
+
+.pantalla{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:1.6em;padding:2.4em 4em 6.5em}
+.pantalla.pdf{padding:0}
+.visor{position:absolute;inset:0;background:var(--dk)}
+.visor iframe{width:100%;height:100%;border:0;background:#fff}
+
+/* Textos */
+.titulo{margin:0;font-size:3.4em;font-weight:800;line-height:1.08;color:#fff;max-width:18em}
+.titulo::after{content:"";display:block;width:5em;height:.14em;margin-top:.4em;border-radius:99px;background:linear-gradient(90deg,var(--or),transparent)}
+.pildora{display:inline-flex;align-self:flex-start;align-items:center;padding:.2em .9em;border-radius:999px;background:var(--cristal-pildora);border:1px solid var(--cristal-borde);font-size:1.25em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff}
+.linea{margin:0;font-size:1.6em;font-weight:600;line-height:1.35;color:#fff}
+.linea + .linea{margin-top:.35em}
+.cristal{background:var(--cristal);border:1px solid var(--cristal-borde);border-radius:var(--radio-tarjeta);padding:.9em 1.2em;max-width:26em}
+.aviso-ejemplo{position:absolute;right:2em;bottom:6em;margin:0;font-size:1.25em;font-weight:700;color:#fff}
+
+.logos{display:flex;gap:1.2em;justify-content:center;align-items:center}
+.logos .logo-dad{height:3.6em;width:3.6em}
+.logo-espacio{display:grid;place-items:center;text-align:center;min-height:3.6em;min-width:9em;padding:.4em 1em;border:2px dashed var(--cristal-borde);border-radius:var(--radio-tarjeta);background:var(--cristal);color:#fff;font-size:1.25em;font-weight:600}
+.centro,.texto-col,.cuadro{display:flex;flex-direction:column;align-items:flex-start;gap:.9em}
+
+/* Loop */
+.cuadros{position:relative;flex:1}
+.cuadro{position:absolute;inset:0;justify-content:center;opacity:0;transition:opacity .8s}
+.cuadro.on{opacity:1}
+
+/* QR (caja blanca como .qrbox de la Sala, para que el código se lea) */
+.dos-col{display:grid;grid-template-columns:1.25fr 1fr;gap:3em;align-items:center}
+.qr-col{display:flex;flex-direction:column;align-items:center;gap:.7em}
+.qrbox{background:#fff;padding:12px;border-radius:var(--radio-tarjeta);width:min(30em,100%);aspect-ratio:1;max-height:56vh}
+.qrbox svg{display:block;width:100%;height:100%}
+.qr-nota{margin:0;font-size:1.25em;font-weight:700;letter-spacing:.04em;color:#fff}
+
+.negro{position:absolute;inset:0;background:#000;z-index:5}
+
+/* Botones manuales: estilo de los botones de la Sala (fondo #22345a), siempre a la vista.
+   En pantalla completa se esconden si no se mueve el ratón. */
+.respaldo{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;flex-direction:column;gap:6px;padding:8px 12px;background:var(--sala-fondo);border-top:1px solid var(--cristal-borde);transition:opacity .3s}
+.respaldo.oculta{opacity:0;pointer-events:none}
+.respaldo-fila{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.respaldo .btn.chico{min-height:40px;padding:0 12px;font-size:.8rem;border:0;border-radius:8px;background:var(--sala-boton);color:#fff}
+.respaldo .btn.chico:hover:not(:disabled){background:var(--sala-boton-hover)}
+.respaldo .btn.chico.activo{background:var(--or);color:#1a1a1a}
+.respaldo .btn.chico .ico{width:1.2em;height:1.2em}

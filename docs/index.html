@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inicio · Cabina DAD (maqueta)</title>
+<link rel="stylesheet" href="css/cabina.css">
+<style>
+  .acceso{display:flex;align-items:center;gap:14px;color:inherit;text-decoration:none;transition:.15s}
+  .acceso:hover{border-color:var(--mid)}
+  .acceso h3{font-size:1.02rem}
+  .acceso p{color:var(--mute)}
+  .acceso .ico-redondo{width:52px;height:52px}
+  .intro{margin:8px 0 0;font-size:.9rem}
+  .pasos{margin:8px 0 0;padding-left:20px;font-size:.86rem}
+  .pasos li{margin-bottom:6px}
+  .reinicio{margin-top:12px}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <img class="logo-dad" src="img/logo-dad-anillo.png" alt="DAD · CUCEA" width="160" height="160">
+      <div>
+        <p class="eyebrow">Departamento de Administración · CUCEA</p>
+        <h1>Cabina de <span>proyección</span></h1>
+      </div>
+    </div>
+    <div class="pills">
+      <span class="pill">Maqueta · etapa 1</span>
+      <span class="pill">Contenido ficticio</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="intro">Prueba sin conexión de las dos pantallas de la cabina. Todo el material es de ejemplo: no hay datos ni archivos reales, y no se conecta a ninguna base de datos.</p>
+
+  <h2 class="sec">Pantallas</h2>
+  <a class="card acceso" href="proyeccion/" target="_blank" rel="noopener">
+    <span class="ico-redondo" id="icoProy"></span>
+    <span><h3>Proyección</h3><p>La página de la computadora de cabina. Se abre una vez, en pantalla completa.</p></span>
+  </a>
+  <a class="card mid acceso" href="control/" target="_blank" rel="noopener">
+    <span class="ico-redondo" id="icoCtl"></span>
+    <span><h3>Control</h3><p>El control remoto para el celular. Aquí se abre en otra pestaña del mismo navegador.</p></span>
+  </a>
+
+  <h2 class="sec">Cómo probar</h2>
+  <div class="card mid">
+    <ol class="pasos">
+      <li>Abre <b>Proyección</b>. Se abre en otra pestaña.</li>
+      <li>Abre <b>Control</b>. Arriba debe decir «Cabina conectada».</li>
+      <li>Toca los cinco botones de Control y mira cómo cambia la Proyección.</li>
+      <li>En <b>Presentación</b>, usa <b>Anterior</b> y <b>Siguiente</b>.</li>
+      <li>Prueba <b>Pantalla en negro</b> y <b>Cerrar cabina</b> (no borra nada real).</li>
+    </ol>
+    <button type="button" class="btn reinicio" id="reiniciar">Restablecer el estado de ejemplo</button>
+  </div>
+</main>
+<script src="js/comun.js"></script>
+<script>
+  document.getElementById("icoProy").innerHTML = Cabina.icono("encendida");
+  document.getElementById("icoCtl").innerHTML = Cabina.icono("qr");
+  document.getElementById("reiniciar").addEventListener("click", function () { Cabina.restablecer(); this.textContent = "Estado restablecido"; });
+</script>
+</body>
+</html>

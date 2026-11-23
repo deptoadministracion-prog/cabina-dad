@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyección · Cabina DAD (maqueta)</title>
+<link rel="stylesheet" href="../css/cabina.css">
+<link rel="stylesheet" href="../css/proyeccion.css">
+</head>
+<body class="proyeccion">
+
+<main class="escenario" id="escenario">
+
+  <!-- 1. Entrada: flyer de ejemplo -->
+  <section class="pantalla" data-momento="entrada" hidden>
+    <div class="logos">
+      <div class="logo-espacio" role="img" aria-label="Espacio para logo, pendiente">Logo 1 (pendiente)</div>
+      <div class="logo-espacio" role="img" aria-label="Espacio para logo, pendiente">Logo 2 (pendiente)</div>
+      <img class="logo-dad" src="../img/logo-dad-anillo.png" alt="Departamento de Administración (DAD)" width="160" height="160">
+    </div>
+    <div class="centro">
+      <span class="pildora">Presentación de libro</span>
+      <h1 class="titulo">Título del libro de ejemplo</h1>
+      <div class="cristal">
+        <p class="linea">Ponente de ejemplo</p>
+        <p class="linea">Lugar de ejemplo · Fecha por confirmar</p>
+      </div>
+    </div>
+    <p class="aviso-ejemplo">Contenido ficticio de la maqueta</p>
+  </section>
+
+  <!-- 2. Loop general: tres cuadros de ejemplo que se repiten -->
+  <section class="pantalla" data-momento="loop" hidden>
+    <div class="cuadros" id="cuadros">
+      <article class="cuadro on">
+        <span class="pildora">Loop general · ejemplo</span>
+        <h1 class="titulo">Bienvenidas y bienvenidos</h1>
+        <div class="cristal"><p class="linea">Texto de ejemplo para el primer cuadro del loop.</p></div>
+      </article>
+      <article class="cuadro">
+        <span class="pildora">Loop general · ejemplo</span>
+        <h1 class="titulo">Silencia tu celular</h1>
+        <div class="cristal"><p class="linea">Texto de ejemplo para el segundo cuadro del loop.</p></div>
+      </article>
+      <article class="cuadro">
+        <span class="pildora">Loop general · ejemplo</span>
+        <h1 class="titulo">Pronto comenzamos</h1>
+        <div class="cristal"><p class="linea">Texto de ejemplo para el tercer cuadro del loop.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3. QR de descarga -->
+  <section class="pantalla" data-momento="qr-descarga" hidden>
+    <div class="dos-col">
+      <div class="texto-col">
+        <span class="pildora">QR de descarga · ejemplo</span>
+        <h1 class="titulo">Descarga la app del evento</h1>
+        <div class="cristal"><p class="linea">Escanea el código para instalar la app de ejemplo.</p></div>
+      </div>
+      <div class="qr-col">
+        <div class="qrbox" data-qr></div>
+        <p class="qr-nota">QR DE EJEMPLO · no escanear</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Presentación: PDF de ejemplo -->
+  <section class="pantalla pdf" data-momento="presentacion" hidden>
+    <div class="visor" id="visorPdf"></div>
+  </section>
+
+  <!-- 5. QR de asistencia: marcador (la Sala real se conecta en la etapa 3) -->
+  <section class="pantalla" data-momento="qr-asistencia" hidden>
+    <div class="dos-col">
+      <div class="texto-col">
+        <span class="pildora">QR de asistencia · marcador</span>
+        <h1 class="titulo">Registra tu asistencia</h1>
+        <div class="cristal">
+          <p class="linea">Aquí se mostrará la Sala del DAD con el código real (etapa 3).</p>
+          <p class="linea">El código de ejemplo se renueva en <b id="cuenta">25</b> s.</p>
+        </div>
+      </div>
+      <div class="qr-col">
+        <div class="qrbox" data-qr></div>
+        <p class="qr-nota">QR DE EJEMPLO · no escanear</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cabina cerrada (simulación) -->
+  <section class="pantalla" data-momento="cerrada" hidden>
+    <div class="centro">
+      <span class="pildora">Maqueta</span>
+      <h1 class="titulo">Cabina cerrada</h1>
+      <div class="cristal">
+        <p class="linea">Simulación: no se borró nada real.</p>
+        <p class="linea">Para continuar, toca un botón de abajo o «Abrir cabina de ejemplo» en Control.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="negro" id="negro" hidden></div>
+</main>
+
+<!-- Botones manuales de respaldo (si falla el internet o el celular) -->
+<nav class="respaldo" id="respaldo" aria-label="Botones manuales de respaldo">
+  <div class="respaldo-fila" id="respaldoMomentos"></div>
+  <div class="respaldo-fila">
+    <button type="button" class="btn chico" id="rAnt" hidden></button>
+    <button type="button" class="btn chico" id="rSig" hidden></button>
+    <button type="button" class="btn chico" id="rNegro"></button>
+    <button type="button" class="btn chico" id="rPantalla"></button>
+    <button type="button" class="btn chico" id="rCerrar"></button>
+  </div>
+</nav>
+
+<script src="../js/comun.js"></script>
+<script src="../js/proyeccion.js"></script>
+</body>
+</html>

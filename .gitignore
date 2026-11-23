@@ -1,0 +1,50 @@
+# Repositorio PÚBLICO: aquí solo va la parte web. Todo lo interno se queda en la computadora.
+# Lo que NO esté en esta lista y esté en la carpeta SÍ se publicaría: revisa `git status` antes de cada commit.
+
+# ---- Carpetas internas
+sql/
+pruebas/
+etapa0/
+referencia/
+.claude/
+node_modules/
+
+# ---- Notas internas: cualquier .md en cualquier carpeta, salvo el LEEME.md público de la raíz
+*.md
+!/LEEME.md
+instrucciones-cabina.md
+identidad-visual.md
+contexto-app-dad-para-cabina.md
+
+# ---- Configuración y secretos
+.mcp.json
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# ---- Herramientas locales (no forman parte del sitio)
+servir.js
+
+# ---- Material real de eventos: nunca se sube (solo el PDF de ejemplo)
+*.pdf
+!/docs/archivos-ejemplo/presentacion-ejemplo.pdf
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.pptx
+*.ppt
+*.zip
+
+# ---- Temporales y del sistema
+*.tmp
+*.log
+*.bak
+*.swp
+~*
+.DS_Store
+Thumbs.db
+desktop.ini
