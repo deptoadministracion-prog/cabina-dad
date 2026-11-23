@@ -1,5 +1,7 @@
 /* Proyección (maqueta). Muestra el material del momento activo y obedece a Control.
-   Atajos en esta computadora: 1 a 5 (momentos), N (pantalla negra), flechas (presentación), F (pantalla completa). */
+   Esta pantalla NO tiene botones ni barras: se proyecta ante el público.
+   Atajos en esta computadora: 1 a 5 (momentos), N (pantalla negra), flechas (anterior/siguiente en la
+   presentación) y F (pantalla completa). Esc sale de pantalla completa (lo hace el navegador). */
 (function () {
   "use strict";
   var C = window.Cabina;
@@ -7,39 +9,11 @@
   var pantallas = document.querySelectorAll(".pantalla");
   var negro = document.getElementById("negro");
   var visor = document.getElementById("visorPdf");
-  var barra = document.getElementById("respaldo");
-  var filaMomentos = document.getElementById("respaldoMomentos");
-  var rAnt = document.getElementById("rAnt");
-  var rSig = document.getElementById("rSig");
-  var rNegro = document.getElementById("rNegro");
-  var rPantalla = document.getElementById("rPantalla");
-  var rCerrar = document.getElementById("rCerrar");
+  var avisoF = document.getElementById("avisoF");
   var cuenta = document.getElementById("cuenta");
-  var actual = C.leer();
   var pdfMostrado = 0;
 
   document.querySelectorAll("[data-qr]").forEach(function (el) { el.innerHTML = C.qrEjemplo(); });
-
-  /* Botones de respaldo */
-  C.MOMENTOS.forEach(function (m, i) {
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = "btn sec chico";
-    b.dataset.id = m.id;
-    b.innerHTML = C.icono(m.icono) + "<span>" + (i + 1) + ". " + m.nombre + "</span>";
-    b.addEventListener("click", function () { C.escribir({ momento: m.id, cerrada: false }); });
-    filaMomentos.appendChild(b);
-  });
-  rAnt.innerHTML = C.icono("izquierda") + "<span>Anterior</span>";
-  rSig.innerHTML = "<span>Siguiente</span>" + C.icono("derecha");
-  rAnt.addEventListener("click", function () { moverPagina(-1); });
-  rSig.addEventListener("click", function () { moverPagina(1); });
-  rNegro.addEventListener("click", alternarNegro);
-  rPantalla.addEventListener("click", alternarPantallaCompleta);
-  rCerrar.innerHTML = C.icono("apagar") + "<span>Cerrar cabina</span>";
-  rCerrar.addEventListener("click", function () {
-    C.confirmarCierre(function () { C.escribir({ cerrada: true, negro: false }); });
-  });
 
   function moverPagina(d) {
     var e = C.leer();
@@ -54,38 +28,27 @@
     else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
   }
 
-  /* PDF de ejemplo con el visor del propio navegador (sin librerías externas) */
+  /* PDF de ejemplo con el visor del propio navegador (sin librerías externas).
+     El visor no recibe el ratón (ver proyeccion.css): así el cursor y los atajos siempre son de esta página. */
   function mostrarPdf(pagina) {
     if (pdfMostrado === pagina) { return; }
     pdfMostrado = pagina;
     var marco = document.createElement("iframe");
     marco.title = "Presentación de ejemplo, página " + pagina;
+    marco.tabIndex = -1;
+    marco.addEventListener("load", function () { window.focus(); });   // que las flechas sigan llegando a esta página
     marco.src = "../archivos-ejemplo/presentacion-ejemplo.pdf#page=" + pagina + "&toolbar=0&navpanes=0&scrollbar=0&view=Fit";
     visor.innerHTML = "";
     visor.appendChild(marco);
   }
 
   function pintar(e) {
-    actual = e;
     var id = e.cerrada ? "cerrada" : e.momento;
     pantallas.forEach(function (p) { p.hidden = p.dataset.momento !== id; });
     negro.hidden = !e.negro || e.cerrada;
 
     if (id === "presentacion") { mostrarPdf(e.pagina); }
     else { visor.innerHTML = ""; pdfMostrado = 0; }
-
-    filaMomentos.querySelectorAll("button").forEach(function (b) {
-      var on = !e.cerrada && b.dataset.id === e.momento;
-      b.classList.toggle("activo", on);
-      b.setAttribute("aria-pressed", on ? "true" : "false");
-    });
-    var pres = id === "presentacion";
-    rAnt.hidden = !pres;
-    rSig.hidden = !pres;
-    rAnt.disabled = e.pagina <= 1;
-    rSig.disabled = e.pagina >= C.PDF_PAGINAS;
-    rNegro.innerHTML = C.icono(e.negro ? "encendida" : "apagada") + "<span>" + (e.negro ? "Quitar pantalla negra" : "Pantalla en negro (N)") + "</span>";
-    rPantalla.innerHTML = C.icono("pantalla") + "<span>" + (document.fullscreenElement ? "Salir de pantalla completa" : "Pantalla completa (F)") + "</span>";
   }
   C.suscribir(pintar);
 
@@ -107,26 +70,46 @@
   C.marcarLatido();
   setInterval(C.marcarLatido, 2000);
 
-  /* Atajos de teclado */
+  /* Atajos de teclado (la única forma de manejar esta pantalla desde esta computadora) */
   document.addEventListener("keydown", function (ev) {
-    if (ev.ctrlKey || ev.altKey || ev.metaKey || document.querySelector(".velo")) { return; }
+    if (ev.ctrlKey || ev.altKey || ev.metaKey) { return; }
     var k = ev.key.toLowerCase();
-    if (k >= "1" && k <= String(C.MOMENTOS.length)) { C.escribir({ momento: C.MOMENTOS[Number(k) - 1].id, cerrada: false }); }
-    else if (k === "n") { alternarNegro(); }
-    else if (k === "f") { alternarPantallaCompleta(); }
+    var esMomento = /^[1-9]$/.test(k) && Number(k) <= C.MOMENTOS.length;
+    if (esMomento) { if (!ev.repeat) { C.escribir({ momento: C.MOMENTOS[Number(k) - 1].id, cerrada: false }); } }
+    else if (k === "n") { if (!ev.repeat) { alternarNegro(); } }
+    else if (k === "f") { if (!ev.repeat) { alternarPantallaCompleta(); } }
     else if (k === "arrowright") { moverPagina(1); }
     else if (k === "arrowleft") { moverPagina(-1); }
   });
 
-  /* En pantalla completa, los botones se esconden tras 3 s sin mover el ratón */
-  var temporizador = null;
-  function mostrarBarra() {
-    barra.classList.remove("oculta");
-    clearTimeout(temporizador);
-    if (document.fullscreenElement) {
-      temporizador = setTimeout(function () { barra.classList.add("oculta"); }, 3000);
+  /* ---------- Pantalla completa ----------
+     Fuera de pantalla completa (preparación): se ve el aviso «Pulsa F para pantalla completa».
+     En pantalla completa: el aviso queda oculto (atributo hidden + regla de CSS) y no hay ningún
+     código que lo muestre con el ratón. El cursor se esconde tras 3 s sin moverlo y reaparece al moverlo. */
+  var consulta = window.matchMedia ? window.matchMedia("(display-mode: fullscreen)") : null;   // también cubre F11
+  var temporizadorCursor = null;
+
+  function enPantallaCompleta() {
+    return !!document.fullscreenElement || !!(consulta && consulta.matches);
+  }
+  function mostrarCursor() {
+    document.body.classList.remove("sin-cursor");
+    clearTimeout(temporizadorCursor);
+    if (enPantallaCompleta()) {
+      temporizadorCursor = setTimeout(function () { document.body.classList.add("sin-cursor"); }, 3000);
     }
   }
-  document.addEventListener("mousemove", mostrarBarra);
-  document.addEventListener("fullscreenchange", function () { pintar(actual); mostrarBarra(); });
+  function actualizarModo() {
+    var completa = enPantallaCompleta();
+    document.body.classList.toggle("pantalla-completa", completa);
+    avisoF.hidden = completa;
+    mostrarCursor();
+  }
+  document.addEventListener("mousemove", mostrarCursor);
+  document.addEventListener("fullscreenchange", actualizarModo);
+  if (consulta) {
+    if (consulta.addEventListener) { consulta.addEventListener("change", actualizarModo); }
+    else if (consulta.addListener) { consulta.addListener(actualizarModo); }
+  }
+  actualizarModo();
 })();

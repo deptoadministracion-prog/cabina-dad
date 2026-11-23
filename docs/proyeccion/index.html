@@ -95,7 +95,7 @@
       <h1 class="titulo">Cabina cerrada</h1>
       <div class="cristal">
         <p class="linea">Simulación: no se borró nada real.</p>
-        <p class="linea">Para continuar, toca un botón de abajo o «Abrir cabina de ejemplo» en Control.</p>
+        <p class="linea">Para continuar, usa «Abrir cabina de ejemplo» en Control.</p>
       </div>
     </div>
   </section>
@@ -103,17 +103,10 @@
   <div class="negro" id="negro" hidden></div>
 </main>
 
-<!-- Botones manuales de respaldo (si falla el internet o el celular) -->
-<nav class="respaldo" id="respaldo" aria-label="Botones manuales de respaldo">
-  <div class="respaldo-fila" id="respaldoMomentos"></div>
-  <div class="respaldo-fila">
-    <button type="button" class="btn chico" id="rAnt" hidden></button>
-    <button type="button" class="btn chico" id="rSig" hidden></button>
-    <button type="button" class="btn chico" id="rNegro"></button>
-    <button type="button" class="btn chico" id="rPantalla"></button>
-    <button type="button" class="btn chico" id="rCerrar"></button>
-  </div>
-</nav>
+<!-- Esta pantalla no tiene botones ni barras: se proyecta ante el público.
+     Solo se maneja con Control (celular) o con el teclado de esta computadora (1 a 5, N, flechas, F).
+     El aviso es solo de preparación: la página lo oculta por completo en pantalla completa. -->
+<p class="aviso-f" id="avisoF" hidden>Pulsa F para pantalla completa</p>
 
 <script src="../js/comun.js"></script>
 <script src="../js/proyeccion.js"></script>
