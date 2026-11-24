@@ -65,9 +65,14 @@
     </div>
   </section>
 
-  <!-- 4. Presentación: PDF de ejemplo -->
+  <!-- 4. Presentación: PDF de ejemplo, una página a la vez (pdf.js dibuja en un canvas; ver js/proyeccion.js) -->
   <section class="pantalla pdf" data-momento="presentacion" hidden>
-    <div class="visor" id="visorPdf"></div>
+    <div class="visor" id="visorPdf">
+      <div class="visor-msg" id="visorMsg" role="status" aria-live="polite" hidden>
+        <h1 class="titulo" id="visorMsgTitulo"></h1>
+        <div class="cristal" id="visorMsgCuerpo"><p class="linea" id="visorMsgDetalle"></p></div>
+      </div>
+    </div>
   </section>
 
   <!-- 5. QR de asistencia: marcador (la Sala real se conecta en la etapa 3) -->

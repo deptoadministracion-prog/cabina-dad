@@ -15,6 +15,7 @@ El sitio está en la carpeta `docs/`, que es la que publica GitHub Pages:
 - `control/`: control remoto para el celular.
 - `css/`, `js/`, `fonts/`, `img/`: estilos, código, tipografía y logo.
 - `archivos-ejemplo/`: un PDF ficticio de 5 páginas.
+- `vendor/pdfjs/`: [pdf.js](https://mozilla.github.io/pdf.js/), alojado aquí (sin CDN) para mostrar la presentación una página a la vez.
 
 ## Cómo verla en tu computadora
 
@@ -30,4 +31,5 @@ Luego abre `http://localhost:8001` en Chrome, Edge o Firefox. Para detener el se
 
 - **Íconos:** [Lucide](https://lucide.dev), licencia ISC. Están incluidos dentro de `docs/js/comun.js`.
 - **Tipografía:** Montserrat, licencia SIL Open Font License 1.1 (OFL). El texto de la licencia está en `docs/fonts/OFL.txt`.
+- **Visor de PDF:** [pdf.js](https://github.com/mozilla/pdf.js) (paquete `pdfjs-dist` 6.5.438, compilación "legacy"), de Mozilla, licencia Apache 2.0. La licencia está en `docs/vendor/pdfjs/LICENSE` y, en sus subcarpetas, las de los datos que incluye (fuentes estándar, mapas de caracteres y decodificadores de imagen). La nota de procedencia está en `docs/vendor/pdfjs/LEEME-pdfjs.txt`.
 - **Logo:** el logo del DAD (`docs/img/logo-dad-anillo.png`) es de la institución y se incluye únicamente para esta maqueta.

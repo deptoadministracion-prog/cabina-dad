@@ -1,0 +1,17 @@
+pdf.js (Mozilla) incluido localmente, sin CDN ni direcciones externas.
+
+Paquete:   pdfjs-dist 6.5.438 (compilación "legacy", para navegadores más antiguos)
+Fuente:    registro oficial de npm (npm pack pdfjs-dist@6.5.438)
+           https://www.npmjs.com/package/pdfjs-dist
+Código:    https://github.com/mozilla/pdf.js
+Integridad: sha512-vg8Pw1x+AFKy4AMDvhuWl5cOYV8d698UoEANoFFhc79hqXDnZQqnOXoxw3HG907WHOg1JYOvLhP756boddFxpA==
+           (coincide con la que publica el registro)
+Licencia:  Apache License 2.0 (archivo LICENSE de esta carpeta).
+
+Archivos tomados del paquete, sin modificar:
+  legacy/build/pdf.min.mjs, legacy/build/pdf.worker.min.mjs   (aquí: pdf.min.mjs y pdf.worker.min.mjs)
+  cmaps/, standard_fonts/, iccs/, wasm/   (con sus licencias: Adobe/BSD, Foxit, Liberation, OpenJPEG, JBIG2, QCMS)
+  Se omiten los archivos quickjs-eval (solo sirven para JavaScript dentro de PDF, que está desactivado).
+
+Para actualizar: descargar otra versión con npm pack, comparar la huella con la del registro y reemplazar
+esta carpeta completa.

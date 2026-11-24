@@ -9,8 +9,14 @@ body.proyeccion{height:100vh;overflow:hidden;background:var(--dk-oscuro)}
 
 .pantalla{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:1.6em;padding:2.4em 4em}
 .pantalla.pdf{padding:0}
-.visor{position:absolute;inset:0;background:var(--dk)}
-.visor iframe{width:100%;height:100%;border:0;background:#fff;pointer-events:none}   /* el ratón nunca llega al visor: el cursor y los atajos son de esta página */
+/* Visor de la presentación: una página a la vez, a pantalla completa. La página se escala sin deformarse (contain) y
+   el sobrante, si la proporción de la pantalla no coincide, se rellena con el azul oscuro de la cabina (no negro).
+   Solo un canvas tiene .on; el cambio de página es instantáneo, sin recarga (ver js/proyeccion.js). */
+.visor{position:absolute;inset:0;background:var(--dk-oscuro);overflow:hidden}
+.visor canvas.pagina{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.visor canvas.pagina.on{display:block}
+.visor-msg{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:.9em;padding:2.4em 4em;background:var(--dk-oscuro)}
+.visor-msg[hidden]{display:none}
 
 /* Textos */
 .titulo{margin:0;font-size:3.4em;font-weight:800;line-height:1.08;color:#fff;max-width:18em}
